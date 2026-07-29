@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Admin — La Casa del Hincha</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" />
+  <link rel="icon" type="image/webp" href="assets/img/logo-mark.webp" />
+  <link rel="stylesheet" href="admin.css?v=20260733" />
+</head>
+<body>
+  <!-- Login -->
+  <div class="login" data-login>
+    <form class="login__card" data-login-form>
+      <img class="login__logo" src="assets/img/logo.webp" alt="La Casa del Hincha" />
+      <h1>Panel de administración</h1>
+      <p>Acceso privado de la tienda</p>
+      <div class="f"><label for="em">Correo</label><input id="em" type="text" name="email" autocomplete="username" required /></div>
+      <div class="f"><label for="pw">Contraseña</label><input id="pw" type="password" name="password" autocomplete="current-password" required /></div>
+      <button class="btn" style="width:100%" type="submit" data-login-btn>Ingresar</button>
+      <div class="msg msg--err hidden" data-login-msg></div>
+      <p class="note" data-config-note style="text-align:center;margin-top:1rem"></p>
+    </form>
+  </div>
+
+  <!-- App -->
+  <div class="admin" data-admin>
+    <div class="topbar">
+      <div class="topbar__brand"><img src="assets/img/logo-mark.webp" alt="" /> Admin</div>
+      <button class="topbar__out" data-logout>Salir</button>
+    </div>
+    <div class="tabs">
+      <button data-tab="add" class="is-active">Agregar producto</button>
+      <button data-tab="list">Productos</button>
+      <button data-tab="orders">Pedidos</button>
+      <button data-tab="settings">Pago (QR)</button>
+    </div>
+
+    <div class="wrap">
+      <!-- AGREGAR / EDITAR -->
+      <section class="panel is-active" data-panel="add">
+        <h2 class="sec" data-form-title>Agregar producto</h2>
+        <form class="card" data-product-form>
+          <input type="hidden" name="id" />
+          <div class="grid2">
+            <div class="f"><label>Nombre del producto</label><input type="text" name="name" placeholder="Ej. Bolivia Local 2025" required /></div>
+            <div class="f"><label>Equipo / selección (para búsqueda)</label><input type="text" name="team" placeholder="Ej. Selección Bolivia" /></div>
+          </div>
+          <div class="f"><label>Descripción</label><textarea name="description" placeholder="Detalles, material, temporada..."></textarea></div>
+
+          <div class="grid2">
+            <div class="f"><label>Categorías</label>
+              <div class="chips" data-cats>
+                <label class="chip"><input type="checkbox" value="Masculino"/> Masculino</label>
+                <label class="chip"><input type="checkbox" value="Femenino"/> Femenino</label>
+                <label class="chip"><input type="checkbox" value="Infantil"/> Infantil</label>
+              </div>
+            </div>
+            <div class="f"><label>Tallas disponibles</label>
+              <div class="chips" data-sizes>
+                <label class="chip"><input type="checkbox" value="S"/> S</label>
+                <label class="chip"><input type="checkbox" value="M"/> M</label>
+                <label class="chip"><input type="checkbox" value="L"/> L</label>
+                <label class="chip"><input type="checkbox" value="XL"/> XL</label>
+                <label class="chip"><input type="checkbox" value="XXL"/> XXL</label>
+                <label class="chip"><input type="checkbox" value="Niño"/> Niño</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid2">
+            <div class="f"><label>Precio (Bs)</label><input type="number" name="price" min="0" step="1" placeholder="320" required /></div>
+            <div class="f"><label>Stock disponible</label><input type="number" name="stock" min="0" step="1" value="1" /></div>
+          </div>
+
+          <div class="f"><label class="chk"><input type="checkbox" name="is_promo" data-promo /> En promoción</label></div>
+          <div class="f hidden" data-promo-field><label>Precio promocional (Bs) — el precio normal quedará tachado</label><input type="number" name="price_promo" min="0" step="1" placeholder="260" /></div>
+
+          <div class="f"><label class="chk"><input type="checkbox" name="allow_custom" /> Permite personalizar con nombre y número</label></div>
+
+          <div class="f"><label>Fotos del producto (máx. 3)</label>
+            <div class="imgs" data-imgs>
+              <label class="imgslot">Foto 1<input type="file" accept="image/*" data-img="0"/></label>
+              <label class="imgslot">Foto 2<input type="file" accept="image/*" data-img="1"/></label>
+              <label class="imgslot">Foto 3<input type="file" accept="image/*" data-img="2"/></label>
+            </div>
+          </div>
+
+          <button class="btn" type="submit" data-save-btn>Guardar producto</button>
+          <button class="btn btn--ghost hidden" type="button" data-cancel-edit>Cancelar edición</button>
+          <div class="msg hidden" data-form-msg></div>
+        </form>
+      </section>
+
+      <!-- LISTA -->
+      <section class="panel" data-panel="list">
+        <h2 class="sec">Productos publicados</h2>
+        <div class="list" data-products-list><div class="empty">Cargando…</div></div>
+      </section>
+
+      <!-- PEDIDOS -->
+      <section class="panel" data-panel="orders">
+        <h2 class="sec">Pedidos recibidos</h2>
+        <div data-orders-list><div class="empty">Cargando…</div></div>
+      </section>
+
+      <!-- AJUSTES / QR -->
+      <section class="panel" data-panel="settings">
+        <h2 class="sec">QR de pago</h2>
+        <div class="card">
+          <div class="qrbox">
+            <img class="qrprev hidden" data-qr-prev alt="QR de pago" />
+            <div style="flex:1;min-width:220px">
+              <div class="f"><label>Imagen del QR de pago</label>
+                <label class="imgslot" style="width:120px;height:120px">Subir QR<input type="file" accept="image/*" data-qr-file/></label>
+              </div>
+              <div class="f"><label>Texto bajo el QR</label><textarea data-qr-note placeholder="Escanea el QR y paga el total..."></textarea></div>
+              <button class="btn" type="button" data-qr-save>Guardar QR y texto</button>
+              <div class="msg hidden" data-qr-msg></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="lib/supabase-config.js?v=20260733"></script>
+  <script src="lib/store.js?v=20260733"></script>
+  <script src="admin.js?v=20260733"></script>
+</body>
+</html>
