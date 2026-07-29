@@ -201,6 +201,7 @@ h1, h2, h3, h4 { text-wrap: balance; line-height: 1.02; letter-spacing: -0.02em;
   background: #fff; color: #0a0a0a;
   font-family: var(--disp); font-weight: 800; text-transform: uppercase;
   letter-spacing: .14em; font-size: clamp(.82rem, 1.15vw, 1rem);
+  white-space: nowrap;
   border-radius: 4px;
   isolation: isolate;
   box-shadow: 0 0 0 1px rgba(255,255,255,.5), 0 10px 40px rgba(255,255,255,.18), 0 0 60px rgba(255,255,255,.22);
