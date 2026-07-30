@@ -13,8 +13,8 @@
   <link rel="preload" as="image" href="assets/img/hero.webp" media="(min-width: 1024px)" fetchpriority="high" />
   <link rel="preload" as="image" href="assets/img/hero-mobile.webp" media="(max-width: 1023px)" fetchpriority="high" />
   <link rel="icon" type="image/webp" href="assets/img/logo-mark.webp" />
-  <link rel="stylesheet" href="styles.css?v=20260740" />
-  <link rel="stylesheet" href="shop.css?v=20260740" />
+  <link rel="stylesheet" href="styles.css?v=20260743" />
+  <link rel="stylesheet" href="shop.css?v=20260743" />
 </head>
 <body>
   <a class="skip-link" href="#main">Saltar al contenido</a>
@@ -57,7 +57,7 @@
                alt="Colección de camisetas de fútbol de La Casa del Hincha" fetchpriority="high" />
         </picture>
       </div>
-      <h1 class="hero__headline">Todo el fútbol del mundo<span>en una sola casa</span></h1>
+      <h1 class="hero__headline">Toda la pasión de los hinchas<span>en una sola casa</span></h1>
       <div class="hero__cta-wrap">
         <a class="btn-glow" href="catalogo.html">Hacer pedido</a>
       </div>
@@ -69,15 +69,16 @@
         <div class="manifesto__main reveal">
           <span class="eyebrow">La Casa del Hincha</span>
           <p class="manifesto__big">
-            Marca boliviana, <em>pasión mundial</em>. Traemos la camiseta de cualquier
-            equipo o selección del planeta hasta tus manos.
+            Marca boliviana, <em>pasión mundial</em>. Conectamos a los hinchas con sus colores
+            favoritos y llevamos la pasión hasta cada rincón de Bolivia.
           </p>
         </div>
         <aside class="manifesto__side reveal d2">
           <span class="manifesto__side-label">Nuestra esencia</span>
-          <p>Somos una marca hecha por hinchas, para hinchas. Selecciones, clubes, ediciones
-             especiales y retros: del fútbol boliviano al fútbol del mundo entero.</p>
-          <p>Si existe, la conseguimos. Si la sientes, aquí la encuentras.</p>
+          <p>Somos una marca boliviana hecha por hinchas, para hinchas. Creemos que la pasión no tiene
+             límites ni fronteras, por eso reunimos camisetas y productos que representan a equipos, atletas,
+             selecciones, eventos y todo aquello que mueve a una afición.</p>
+          <p>Si existe, la conseguimos. Si te apasiona, aquí lo encuentras.</p>
         </aside>
       </div>
     </section>
@@ -99,6 +100,19 @@
       </div>
     </section>
 
+    <!-- Política de cambios -->
+    <section class="section--tight" id="devoluciones">
+      <div class="wrap">
+        <div class="policy-box reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 12a9 9 0 019-9 9 9 0 016.7 3M21 12a9 9 0 01-9 9 9 9 0 01-6.7-3"/><path d="M17 3v4h-4M7 21v-4h4"/></svg>
+          <div>
+            <b>Cambios y devoluciones</b>
+            <p>Tienes hasta 2 días para solicitar cambios. Antes de realizar cualquier modificación, revisamos tu caso para brindarte la mejor solución.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Marquee -->
     <div class="marquee reveal" aria-hidden="true">
       <div class="marquee__row">
@@ -115,8 +129,9 @@
         <div class="orders__intro reveal">
           <span class="eyebrow">Pedidos especiales</span>
           <h2 class="orders__title">¿No la encuentras?<br>Nosotros te la traemos</h2>
-          <p class="orders__lead">Pídenos la camiseta de cualquier equipo o selección del mundo. La conseguimos por ti,
-            con la opción de personalizarla con el nombre y número que quieras.</p>
+          <p class="orders__lead">Pídenos la camiseta de cualquier equipo, selección o referente del mundo. La conseguimos por ti
+            con la posibilidad de personalizarla como quieras: nombre, número, parches oficiales, detalles de partidos
+            especiales (Matchday), ediciones únicas y mucho más.</p>
           <ul class="orders__steps">
             <li><span class="orders__n">1</span><div><b>Pagas el 50% al confirmar</b><small>Reservamos tu pedido y comenzamos a traer tu camiseta.</small></div></li>
             <li><span class="orders__n">2</span><div><b>Llega en 2 semanas</b><small>Cualquier pedido, sin importar la cantidad de camisetas.</small></div></li>
@@ -141,7 +156,8 @@
                 <label for="of-talla">Talla</label>
                 <select id="of-talla" name="talla" required>
                   <option value="" disabled selected>Elige</option>
-                  <option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option>
+                  <option>S</option><option>M</option><option>L</option><option>XL</option>
+                  <option>XXL</option><option>XXXL</option><option>4XL</option>
                   <option>Niño</option>
                 </select>
               </div>
@@ -167,6 +183,17 @@
                 <input id="of-num" name="dorsal_numero" type="text" placeholder="Ej. 10" />
               </div>
             </div>
+            <div class="field field--row">
+              <div>
+                <label for="of-parches">Parches oficiales (Bs 20 c/u)</label>
+                <input id="of-parches" name="parches" type="number" min="0" value="0" />
+              </div>
+              <div>
+                <label for="of-matchday">Detalle Matchday</label>
+                <select id="of-matchday" name="matchday"><option value="No">No</option><option value="Sí">Sí (+Bs 20)</option></select>
+              </div>
+            </div>
+            <p class="orders__form-note">Tallas especiales: XXL +Bs 10 · XXXL +Bs 20 · 4XL +Bs 30. Cada parche +Bs 20. Matchday +Bs 20. El precio de la camiseta se cotiza aparte.</p>
             <div class="field">
               <label for="of-notas">Notas (opcional)</label>
               <textarea id="of-notas" name="notas" rows="2" placeholder="Otro detalle importante de tu pedido"></textarea>
@@ -191,8 +218,8 @@
         <div class="trust-grid">
           <div class="trust-item reveal">
             <div class="num" data-count="100">0</div>
-            <h3>% Originales</h3>
-            <p>Trabajamos solo con productos auténticos y de calidad garantizada. Nada de imitaciones sin avisar.</p>
+            <h3>% Calidad garantizada</h3>
+            <p>Productos seleccionados con gran calidad, diseño y detalles para vivir tu pasión.</p>
           </div>
           <div class="trust-item reveal d2">
             <div class="num num--word">Hoy</div>
@@ -370,6 +397,42 @@
         </a>
       </div>
     </section>
+
+    <!-- Preguntas frecuentes -->
+    <section class="section faq" id="faq">
+      <div class="wrap">
+        <div class="faq__head reveal">
+          <span class="eyebrow">Preguntas frecuentes</span>
+          <h2 class="faq__title">Preguntas frecuentes</h2>
+        </div>
+        <div class="faq__list reveal d1">
+          <details class="faq__item">
+            <summary>¿La versión jugador tiene un ajuste más pequeño?</summary>
+            <p>Sí. La versión jugador tiene un corte más entallado, por eso recomendamos elegir una talla más de la que usas normalmente para mayor comodidad.</p>
+          </details>
+          <details class="faq__item">
+            <summary>¿Qué talla debo elegir en la versión hincha?</summary>
+            <p>La versión hincha tiene un ajuste más cómodo. Te recomendamos pedir la talla que usas habitualmente en camisetas.</p>
+          </details>
+          <details class="faq__item">
+            <summary>¿Realizan envíos a todo Bolivia?</summary>
+            <p>Sí. Realizamos envíos nacionales para que puedas recibir tu pasión estés donde estés.</p>
+          </details>
+          <details class="faq__item">
+            <summary>¿Puedo cancelar un pedido personalizado?</summary>
+            <p>No. Al ser un producto personalizado especialmente para ti, no es posible realizar cancelaciones una vez confirmado el pedido.</p>
+          </details>
+          <details class="faq__item">
+            <summary>¿Puedo personalizar mi camiseta con nombre y número?</summary>
+            <p>Sí. Puedes agregar nombre, número, parches y detalles especiales según la camiseta disponible.</p>
+          </details>
+          <details class="faq__item">
+            <summary>¿Cómo puedo saber qué talla elegir?</summary>
+            <p>Si tienes dudas con la talla, puedes escribirnos y te ayudaremos a elegir la opción ideal antes de realizar tu compra.</p>
+          </details>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Footer -->
@@ -389,10 +452,9 @@
         </div>
         <div class="footer__col">
           <h5>Ayuda</h5>
-          <a href="#">Guía de tallas</a>
-          <a href="#">Envíos y entregas</a>
-          <a href="#">Cambios</a>
-          <a href="#">Preguntas frecuentes</a>
+          <a href="#confianza">Envíos y entregas</a>
+          <a href="#devoluciones">Cambios</a>
+          <a href="#faq">Preguntas frecuentes</a>
         </div>
         <div class="footer__col">
           <h5>Contacto</h5>
@@ -458,10 +520,10 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="lib/supabase-config.js?v=20260740"></script>
-  <script src="lib/store.js?v=20260740"></script>
-  <script defer src="lib/manifest.js?v=20260740"></script>
-  <script defer src="main.js?v=20260740"></script>
-  <script defer src="shop.js?v=20260740"></script>
+  <script src="lib/supabase-config.js?v=20260743"></script>
+  <script src="lib/store.js?v=20260743"></script>
+  <script defer src="lib/manifest.js?v=20260743"></script>
+  <script defer src="main.js?v=20260743"></script>
+  <script defer src="shop.js?v=20260743"></script>
 </body>
 </html>

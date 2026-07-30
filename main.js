@@ -250,6 +250,15 @@
       } else {
         lines.push("Personalizacion: No");
       }
+      // extras y recargos
+      var parches = parseInt(g("parches") || "0", 10) || 0;
+      var matchday = g("matchday") === "Sí";
+      var tallaExtra = ({ "XXL": 10, "XXXL": 20, "4XL": 30 })[g("talla")] || 0;
+      var recargos = parches * 20 + (matchday ? 20 : 0) + tallaExtra;
+      if (parches) lines.push("Parches: " + parches + " (Bs " + (parches * 20) + ")");
+      lines.push("Matchday: " + (matchday ? "Si (Bs 20)" : "No"));
+      if (tallaExtra) lines.push("Recargo talla " + g("talla") + ": Bs " + tallaExtra);
+      if (recargos) lines.push("Recargos por extras: Bs " + recargos + " (la camiseta se cotiza aparte)");
       var notas = g("notas");
       if (notas) lines.push("Notas: " + notas);
       lines.push("");

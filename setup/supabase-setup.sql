@@ -50,6 +50,9 @@ create policy orders_admin_read on public.orders
   for select to authenticated using ( true );
 create policy orders_admin_write on public.orders
   for update to authenticated using ( true ) with check ( true );
+drop policy if exists orders_admin_delete on public.orders;
+create policy orders_admin_delete on public.orders
+  for delete to authenticated using ( true );
 
 -- ---------- RESEÑAS ----------
 create table if not exists public.reviews (

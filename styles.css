@@ -488,6 +488,7 @@ h1, h2, h3, h4 { text-wrap: balance; line-height: 1.02; letter-spacing: -0.02em;
 .field textarea { resize:vertical; }
 .is-hidden { display:none !important; }
 .order-form__hint { font-size:.76rem; color:var(--ink-mute); text-align:center; margin-top:.2rem; }
+.orders__form-note { font-size:.76rem; color:var(--ink-mute); line-height:1.45; margin-top:-.2rem; }
 
 .btn-wa { display:inline-flex; align-items:center; justify-content:center; gap:.6rem; width:100%;
   background:#25D366; color:#0a2e14; font-family:var(--disp); font-weight:800; text-transform:uppercase;
@@ -624,6 +625,27 @@ h1, h2, h3, h4 { text-wrap: balance; line-height: 1.02; letter-spacing: -0.02em;
   color: var(--ink); display: grid; place-items: center; transition: transform .25s var(--ease-out), background .25s, color .25s; }
 .care__ctrl:hover { background: var(--ink); color: #fff; transform: translateY(-2px); }
 @media (prefers-reduced-motion: reduce) { .care__track { transition: none; } .care__slide { transition: none; } }
+
+/* =============================================================
+   18e. Política de cambios (cuadro) + Preguntas frecuentes
+   ============================================================= */
+.policy-box { display:flex; gap:1rem; align-items:center; max-width:760px; margin-inline:auto;
+  background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:1.1rem 1.3rem; }
+.policy-box svg { width:30px; height:30px; flex:none; stroke:var(--ink); }
+.policy-box b { display:block; font-family:var(--sans); font-weight:700; font-size:.98rem; margin-bottom:.15rem; }
+.policy-box p { color:var(--ink-soft); font-size:.9rem; line-height:1.5; }
+
+.faq__head { text-align:center; max-width:60ch; margin-inline:auto; margin-bottom:clamp(1.8rem,4vw,2.6rem); }
+.faq__head .eyebrow { display:block; }
+.faq__title { font-size:clamp(1.9rem,5vw,3.2rem); margin-top:.5rem; }
+.faq__list { max-width:760px; margin-inline:auto; display:grid; gap:.7rem; }
+.faq__item { border:1px solid var(--line); border-radius:12px; background:#fff; overflow:hidden; }
+.faq__item summary { list-style:none; cursor:pointer; padding:1.1rem 1.3rem; font-weight:600; font-size:1rem;
+  display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+.faq__item summary::-webkit-details-marker { display:none; }
+.faq__item summary::after { content:"+"; font-size:1.5rem; color:var(--ink-mute); transition:transform .3s var(--ease-out); line-height:1; }
+.faq__item[open] summary::after { transform:rotate(45deg); }
+.faq__item p { padding:0 1.3rem 1.2rem; color:var(--ink-soft); font-size:.94rem; line-height:1.6; }
 
 /* =============================================================
    19. Botones flotantes

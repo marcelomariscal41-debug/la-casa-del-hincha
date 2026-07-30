@@ -275,13 +275,26 @@
         (o.phone ? '<div class="order__meta" style="font-size:.82rem;color:var(--soft);margin-top:.5rem">Tel: ' + esc(o.phone) + '</div>' : '') +
         (o.note ? '<div style="font-size:.82rem;color:var(--soft);margin-top:.3rem">Nota: ' + esc(o.note) + '</div>' : '') +
         '<div class="order__foot"><b>Total: ' + LCH.fmt(o.total) + '</b>' +
-        '<select class="state" data-order="' + o.id + '">' +
-        opt("nuevo", o.status) + opt("en proceso", o.status) + opt("entregado", o.status) +
-        '</select></div></div>';
+        '<span class="order__foot-actions">' +
+          '<select class="state" data-order="' + o.id + '">' +
+          opt("nuevo", o.status) + opt("en proceso", o.status) + opt("entregado", o.status) +
+          '</select>' +
+          '<button class="order__del" data-odel="' + o.id + '" aria-label="Eliminar pedido" title="Eliminar pedido">' +
+            '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13"/></svg>' +
+          '</button>' +
+        '</span></div></div>';
     }).join("");
     $$('[data-order]', box).forEach(function (sel) {
       sel.addEventListener("change", async function () {
         await LCH.client.from("orders").update({ status: sel.value }).eq("id", sel.dataset.order);
+      });
+    });
+    $$('[data-odel]', box).forEach(function (b) {
+      b.addEventListener("click", async function () {
+        if (!confirm("¿Eliminar este pedido? Esta acción no se puede deshacer.")) return;
+        var res = await LCH.client.from("orders").delete().eq("id", b.dataset.odel);
+        if (res.error) { alert("No se pudo eliminar. Falta activar el permiso de borrado de pedidos en Supabase (ver instrucciones)."); return; }
+        loadOrders();
       });
     });
   }
