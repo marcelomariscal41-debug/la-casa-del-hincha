@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" />
   <link rel="icon" type="image/webp" href="assets/img/logo-mark.webp" />
-  <link rel="stylesheet" href="admin.css?v=20260733" />
+  <link rel="stylesheet" href="admin.css?v=20260740" />
 </head>
 <body>
   <!-- Login -->
@@ -57,6 +57,7 @@
                 <label class="chip"><input type="checkbox" value="Masculino"/> Masculino</label>
                 <label class="chip"><input type="checkbox" value="Femenino"/> Femenino</label>
                 <label class="chip"><input type="checkbox" value="Infantil"/> Infantil</label>
+                <label class="chip"><input type="checkbox" value="Mascotas"/> Mascotas</label>
               </div>
             </div>
             <div class="f"><label>Tallas disponibles</label>
@@ -81,11 +82,14 @@
 
           <div class="f"><label class="chk"><input type="checkbox" name="allow_custom" /> Permite personalizar con nombre y número</label></div>
 
-          <div class="f"><label>Fotos del producto (máx. 3)</label>
+          <div class="f"><label>Fotos del producto (máx. 6)</label>
             <div class="imgs" data-imgs>
               <label class="imgslot">Foto 1<input type="file" accept="image/*" data-img="0"/></label>
               <label class="imgslot">Foto 2<input type="file" accept="image/*" data-img="1"/></label>
               <label class="imgslot">Foto 3<input type="file" accept="image/*" data-img="2"/></label>
+              <label class="imgslot">Foto 4<input type="file" accept="image/*" data-img="3"/></label>
+              <label class="imgslot">Foto 5<input type="file" accept="image/*" data-img="4"/></label>
+              <label class="imgslot">Foto 6<input type="file" accept="image/*" data-img="5"/></label>
             </div>
           </div>
 
@@ -127,9 +131,21 @@
     </div>
   </div>
 
+  <!-- Modal de reseñas -->
+  <div class="revm" data-rev-modal hidden>
+    <div class="revm__scrim" data-rev-close></div>
+    <div class="revm__panel">
+      <div class="revm__head">
+        <h3 data-rev-title>Reseñas</h3>
+        <button class="btn btn--ghost btn--sm" data-rev-close>Cerrar</button>
+      </div>
+      <div class="revm__list" data-rev-list></div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="lib/supabase-config.js?v=20260733"></script>
-  <script src="lib/store.js?v=20260733"></script>
-  <script src="admin.js?v=20260733"></script>
+  <script src="lib/supabase-config.js?v=20260740"></script>
+  <script src="lib/store.js?v=20260740"></script>
+  <script src="admin.js?v=20260740"></script>
 </body>
 </html>

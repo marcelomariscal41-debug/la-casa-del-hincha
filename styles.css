@@ -635,6 +635,10 @@ h1, h2, h3, h4 { text-wrap: balance; line-height: 1.02; letter-spacing: -0.02em;
 .float:hover { transform: translateY(-3px) scale(1.05); }
 .float--wa { background:#25D366; box-shadow:0 8px 26px -6px rgba(37,211,102,.7); animation: waPulse 2.8s var(--ease-soft) infinite; }
 .float--ig { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+.float--tt { background:#000; }
+
+/* La frase del hero solo se muestra en celular/tablet (se oculta en PC) */
+@media (min-width: 1024px) { .hero__headline { display: none; } }
 
 /* =============================================================
    20. Garantías — PC: cuadrícula original / Celular: carrusel

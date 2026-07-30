@@ -92,6 +92,20 @@ h2.sec{font-family:var(--disp);font-size:1.3rem;margin-bottom:1rem}
 .spin{display:inline-block;width:18px;height:18px;border:2px solid rgba(0,0,0,.15);border-top-color:var(--ink);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-3px}
 @keyframes sp{to{transform:rotate(360deg)}}
 .hidden{display:none!important}
+
+/* Modal de reseñas */
+.revm{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:1.2rem}
+.revm[hidden]{display:none}
+.revm__scrim{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.revm__panel{position:relative;background:#fff;border-radius:14px;width:100%;max-width:620px;max-height:85vh;display:flex;flex-direction:column;overflow:hidden}
+.revm__head{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.2rem;border-bottom:1px solid var(--line)}
+.revm__head h3{font-family:var(--disp);font-size:1.1rem}
+.revm__list{padding:1rem 1.2rem;overflow-y:auto;display:grid;gap:.9rem}
+.revm__item{display:flex;gap:.9rem;border:1px solid var(--line);border-radius:10px;padding:.7rem}
+.revm__img{width:70px;height:84px;object-fit:cover;border-radius:8px;flex:none;background:var(--line2)}
+.revm__img--none{display:grid;place-items:center;font-size:.66rem;color:var(--mute)}
+.revm__body{flex:1;min-width:0}
+.revm__actions{display:flex;gap:.4rem;margin-top:.5rem}
 .qrbox{display:flex;gap:1.2rem;align-items:flex-start;flex-wrap:wrap}
 .qrprev{width:150px;height:150px;border:1px solid var(--line);border-radius:12px;object-fit:contain;background:#fff}
 .note{font-size:.8rem;color:var(--mute);margin-top:.4rem}

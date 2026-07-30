@@ -7,6 +7,10 @@
   var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
     return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]; }); };
 
+  // Filtro básico de lenguaje no permitido (sexual, armas, drogas, insultos)
+  var BAD = ["porno","xxx"," sexo","sexual","desnud","pene","vagina","tetas"," culo","pija","concha ","zorra","maricon","puta","puto","mierda","verga","coño","pornograf","nazi","hitler","arma","pistola","fusil","rifle","escopeta","bala","droga","cocain","marihuana","cochabamba no","matar","violar","violacion","pedofil"];
+  function badText(s) { s = " " + String(s || "").toLowerCase() + " "; return BAD.some(function (w) { return s.indexOf(w) >= 0; }); }
+
   var PAGE = 8;
   var grid = $("[data-shop-grid]");        // catálogo completo (catalogo.html)
   var featGrid = $("[data-shop-featured]"); // destacados (index.html)
@@ -244,8 +248,15 @@
       var name = $("[data-rev-name]", box).value.trim() || "Cliente";
       var file = $("[data-rev-photo]", box).files[0] || null;
       if (!comment && !file) { err.textContent = "Escribe un comentario o sube una foto."; return; }
+      if (badText(comment) || badText(name)) { err.textContent = "Tu comentario contiene lenguaje no permitido."; return; }
       btn.disabled = true; btn.textContent = "Enviando…";
-      try { await LCH.addReview({ product_id: p.id, author: name, rating: pick, comment: comment }, file); loadReviews(p); loadCardRatings([p]); }
+      try {
+        var r = await LCH.addReview({ product_id: p.id, author: name, rating: pick, comment: comment }, file);
+        if (r && r.pending) {
+          box.innerHTML = '<h3>Opiniones de clientes</h3>' +
+            '<p style="color:var(--ink-soft);font-size:.95rem">¡Gracias por tu opinión! Como incluye una foto, la tienda la revisará antes de publicarla.</p>';
+        } else { loadReviews(p); loadCardRatings([p]); }
+      }
       catch (er) { err.textContent = "No se pudo publicar. Intenta de nuevo."; btn.disabled = false; btn.textContent = "Publicar opinión"; }
     });
     $$('[data-lb]', box).forEach(function (im) { im.addEventListener("click", function () { openLb(im.dataset.lb); }); });

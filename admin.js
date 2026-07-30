@@ -6,7 +6,7 @@
   var LCH = window.LCH;
 
   var loginEl = $("[data-login]"), adminEl = $("[data-admin]");
-  var pendingImages = [null, null, null]; // File objects para las 3 fotos
+  var pendingImages = [null, null, null, null, null, null]; // File objects para las 6 fotos
   var editingImages = [];                  // URLs existentes al editar
 
   /* ---------- arranque ---------- */
@@ -96,13 +96,13 @@
     try {
       // subir imágenes nuevas
       var urls = editingImages.slice();
-      for (var i = 0; i < 3; i++) {
+      for (var i = 0; i < 6; i++) {
         if (pendingImages[i]) {
           var u = await LCH.uploadImage("productos", pendingImages[i]);
           urls[i] = u;
         }
       }
-      urls = urls.filter(Boolean).slice(0, 3);
+      urls = urls.filter(Boolean).slice(0, 6);
 
       var row = {
         name: form.name.value.trim(),
@@ -135,7 +135,7 @@
     var form = $("[data-product-form]");
     form.reset();
     form.id.value = "";
-    pendingImages = [null, null, null]; editingImages = [];
+    pendingImages = [null, null, null, null, null, null]; editingImages = [];
     $$('[data-imgs] .imgslot').forEach(function (s) { var im = s.querySelector("img"); if (im) im.remove(); });
     $("[data-promo-field]").classList.add("hidden");
     $("[data-form-title]").textContent = "Agregar producto";
@@ -166,12 +166,14 @@
         '<div style="text-align:right"><div class="row__price">' + priceHtml + '</div>' +
         '<div class="row__actions" style="margin-top:.5rem">' +
         '<button class="btn btn--ghost btn--sm" data-edit="' + p.id + '">Editar</button>' +
+        '<button class="btn btn--ghost btn--sm" data-reviews="' + p.id + '">Reseñas</button>' +
         '<button class="btn btn--ghost btn--sm" data-toggle="' + p.id + '">' + (p.active ? "Ocultar" : "Mostrar") + '</button>' +
         '<button class="btn btn--ghost btn--sm" data-del="' + p.id + '">Eliminar</button>' +
         '</div></div></div>';
     }).join("");
 
     $$('[data-edit]', box).forEach(function (b) { b.addEventListener("click", function () { editProduct(b.dataset.edit, list); }); });
+    $$('[data-reviews]', box).forEach(function (b) { b.addEventListener("click", function () { openReviews(list.find(function (x) { return x.id === b.dataset.reviews; })); }); });
     $$('[data-toggle]', box).forEach(function (b) { b.addEventListener("click", async function () {
       var p = list.find(function (x) { return x.id === b.dataset.toggle; });
       await LCH.client.from("products").update({ active: !p.active }).eq("id", p.id); loadProducts();
@@ -199,7 +201,7 @@
     if (p.is_promo && p.price_old) { form.price.value = p.price_old; form.price_promo.value = p.price; }
     else { form.price.value = p.price; }
     editingImages = (p.images || []).slice();
-    pendingImages = [null, null, null];
+    pendingImages = [null, null, null, null, null, null];
     $$('[data-imgs] .imgslot').forEach(function (s, i) {
       var im = s.querySelector("img"); if (im) im.remove();
       if (editingImages[i]) { var img = document.createElement("img"); img.src = editingImages[i]; s.appendChild(img); }
@@ -212,6 +214,41 @@
     $$(".panel").forEach(function (pn) { pn.classList.remove("is-active"); });
     $('[data-panel="add"]').classList.add("is-active");
     window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  /* ---------- reseñas (moderación) ---------- */
+  var revModal = $("[data-rev-modal]");
+  $$('[data-rev-close]').forEach(function (b) { b.addEventListener("click", function () { revModal.hidden = true; }); });
+
+  async function openReviews(p) {
+    if (!p) return;
+    $("[data-rev-title]").textContent = "Reseñas · " + p.name;
+    var list = $("[data-rev-list]");
+    list.innerHTML = '<div class="empty"><span class="spin"></span></div>';
+    revModal.hidden = false;
+    var res = await LCH.client.from("reviews").select("*").eq("product_id", p.id).order("created_at", { ascending: false });
+    var rows = (res && res.data) || [];
+    if (!rows.length) { list.innerHTML = '<div class="empty">Este producto aún no tiene reseñas.</div>'; return; }
+    list.innerHTML = rows.map(function (r) {
+      var stars = ""; for (var i = 1; i <= 5; i++) stars += i <= r.rating ? "★" : "☆";
+      return '<div class="revm__item">' +
+        (r.photo ? '<a href="' + esc(r.photo) + '" target="_blank"><img class="revm__img" src="' + esc(r.photo) + '" alt="" /></a>' : '<div class="revm__img revm__img--none">sin foto</div>') +
+        '<div class="revm__body">' +
+          '<div style="color:#e6a700;font-size:1rem">' + stars + '</div>' +
+          '<b>' + esc(r.author || "Cliente") + '</b>' + (r.approved ? '' : ' <span class="tag tag--promo">Pendiente</span>') +
+          (r.comment ? '<p style="margin:.3rem 0;color:var(--soft);font-size:.9rem">' + esc(r.comment) + '</p>' : '') +
+          '<div class="revm__actions">' +
+            (r.approved ? '' : '<button class="btn btn--sm" data-approve="' + r.id + '">Aprobar</button>') +
+            '<button class="btn btn--ghost btn--sm" data-rdel="' + r.id + '">Eliminar</button>' +
+          '</div></div></div>';
+    }).join("");
+    $$('[data-approve]', list).forEach(function (b) { b.addEventListener("click", async function () {
+      await LCH.client.from("reviews").update({ approved: true }).eq("id", b.dataset.approve); openReviews(p);
+    }); });
+    $$('[data-rdel]', list).forEach(function (b) { b.addEventListener("click", async function () {
+      if (!confirm("¿Eliminar esta reseña?")) return;
+      await LCH.client.from("reviews").delete().eq("id", b.dataset.rdel); openReviews(p);
+    }); });
   }
 
   /* ---------- pedidos ---------- */
